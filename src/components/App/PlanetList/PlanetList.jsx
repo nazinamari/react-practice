@@ -1,9 +1,13 @@
-export default function PlanetList ({items}) {
-    return (
-        <ul>
-                {items.map(planet => (
-                <li key={planet}>{planet}</li>
-            ))}
-            </ul>
-    )
+import Planet from '../Planet/Planet';
+
+export default function PlanetList({ planets }) {
+  return (
+    <ul>
+      {planets.map(({ name, id, avatar, description }) => (
+        <li key={id}>
+          <Planet name={name} avatar={avatar} description={description} />
+        </li>
+      ))}
+    </ul>
+  );
 }
