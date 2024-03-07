@@ -5,7 +5,7 @@ export default function PlanetList({ planets }) {
     <ul>
       {planets.map(({ name, id, avatar, description }) => (
         <li key={id}>
-          <Planet name={name} avatar={avatar} description={description} />
+          <Planet id={id} name={name} avatar={avatar} description={description} />
         </li>
       ))}
     </ul>

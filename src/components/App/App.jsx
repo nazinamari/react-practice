@@ -1,10 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
-import axios from 'axios';
 import PlanetList from './PlanetList/PlanetList';
 import { SearchForm } from '../SearchForm/SearchForm';
-
-axios.defaults.baseURL =
-  'https://65e3367a88c4088649f57eb6.mockapi.io/api/planets/';
+import fetchPlanets from '../../api/api';
 
 export default function App() {
   const [planets, setPlanets] = useState([]);
@@ -21,19 +18,17 @@ export default function App() {
   );
 
   useEffect(() => {
-    async function fetchPlanets() {
-      const response = await axios.get('/planets');
-      console.log(response);
-      setPlanets(response.data);
+    async function getPlanets() {
+    const response = await fetchPlanets()
+    setPlanets(response);
     }
-
-    fetchPlanets();
+    getPlanets();
   }, []);
+
 
   return (
     <div>
       <h1>Planets</h1>
-
       <SearchForm onSearch={onSearch} />
       {planets.length > 0 && <PlanetList planets={filteredPlanets} />}
     </div>
