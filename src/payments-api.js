@@ -6,3 +6,8 @@ export const getPayments = async () => {
     const response = await axios.get('/payments');
     return response.data;
 }
+
+export const getPaymentById = async (paymentId) => {
+    const response = await axios.get(`/payments/${paymentId}`);
+    return response.data;
+}
