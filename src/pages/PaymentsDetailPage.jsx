@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { NavLink, Outlet, useParams } from "react-router-dom";
+import { Link, NavLink, Outlet, useLocation, useParams } from "react-router-dom";
 import { getPaymentById } from "../payments-api";
 
 export default function PaymentsDetailPage () {
@@ -7,6 +7,9 @@ export default function PaymentsDetailPage () {
     const [payment, setPayment] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(false);
+
+    const location = useLocation();
+    // console.log(location);
 
     useEffect(() => {
         async function getData() {
@@ -29,6 +32,7 @@ export default function PaymentsDetailPage () {
             {isLoading && <p>Wait</p>}
             {error && <p>Error!</p>}
             <h1>PaymentDetailsPage: {paymentId}</h1>
+            <Link to={location.state}>Go Back</Link>
             {payment && <div>
                 <p>Amount: {payment.amount}</p>
                 <p>Number: {payment.cardNumber}</p>

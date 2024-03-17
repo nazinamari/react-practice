@@ -13,6 +13,8 @@ export default function PaymentsPage () {
     const [params] = useSearchParams();
     const ownerFilter = params.get("owner") ?? "";
 
+// const backLinkRef = useRef(location.state ?? "/payments");
+
     useEffect(() => {
         async function getData() {
             try {
@@ -28,15 +30,20 @@ export default function PaymentsPage () {
         getData();
     }, []);
 
+    // const filteredMovies = movies.filter((movie) => 
+    // movie.title.toLowerCase().includes(movieFilter.toLowerCase())
+    // );
+
     const filteredPayments = useMemo(() => {
         return payments.filter((payment) =>
-          payment.cardOwner.toLowerCase().includes(ownerFilter.toLowerCase())
+            payment.cardOwner.toLowerCase().includes(ownerFilter.toLowerCase())
         );
-      }, [ownerFilter, payments]);
+    }, [ownerFilter, payments]);
 
     return (
         <div>
             <h1>Payments</h1>
+            {/* <Link to={}>Go back</Link> */}
             <OwnerFilter />
             {isLoading && <p>Wait</p>}
             {error && <p>Error!</p>}
