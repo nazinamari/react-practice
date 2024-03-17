@@ -5,6 +5,7 @@ import PaymentsPage from "../../pages/PaymentsPage";
 import NotFoundPage from "../../pages/NotFoundPage";
 import PaymentsDetailPage from "../../pages/PaymentsDetailPage";
 import ClientInfo from "../UserClientInfo/ClientInfo";
+import PaymentReciept from "../PaymentReceipt/PaymentReciept";
 
 export default function App () {
     return (
@@ -16,7 +17,7 @@ export default function App () {
                 <Route path="/payments" element={<PaymentsPage />} />
                 <Route path="/payments/:paymentId" element={<PaymentsDetailPage />}>
                     <Route path="client" element={<ClientInfo />}/>
-                    <Route path="subpage-b" element={<div>Subpage B</div>}/>
+                    <Route path="reciept" element={<PaymentReciept />}/>
                 </Route>
                 <Route path="*" element={<NotFoundPage/>} />
             </Routes>

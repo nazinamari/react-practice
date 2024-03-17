@@ -42,7 +42,7 @@ export default function PaymentsDetailPage () {
                     <NavLink to="client">Client</NavLink>
                 </li>
                 <li>
-                    <NavLink to="subpage-b">Subpage B</NavLink>
+                    <NavLink to="reciept">Reciept</NavLink>
                 </li>
             </ul>
             <Outlet/>
