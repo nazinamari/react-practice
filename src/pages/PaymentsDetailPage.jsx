@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import { Link, NavLink, Outlet, useLocation, useParams } from "react-router-dom";
 import { getPaymentById } from "../payments-api";
 
@@ -49,7 +49,9 @@ export default function PaymentsDetailPage () {
                     <NavLink to="reciept">Reciept</NavLink>
                 </li>
             </ul>
-            <Outlet/>
+            <Suspense fallback={null}>
+                <Outlet/>
+            </Suspense>
         </div>
     );
 }
