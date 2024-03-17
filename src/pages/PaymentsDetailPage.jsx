@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { NavLink, Outlet, useParams } from "react-router-dom";
 import { getPaymentById } from "../payments-api";
 
 export default function PaymentsDetailPage () {
@@ -26,6 +26,8 @@ export default function PaymentsDetailPage () {
 
     return (
         <div>
+            {isLoading && <p>Wait</p>}
+            {error && <p>Error!</p>}
             <h1>PaymentDetailsPage: {paymentId}</h1>
             {payment && <div>
                 <p>Amount: {payment.amount}</p>
@@ -35,8 +37,15 @@ export default function PaymentsDetailPage () {
                 <p>Description: {payment.description}</p>
             </div>
             }
-            {isLoading && <p>Wait</p>}
-            {error && <p>Error!</p>}
+            <ul>
+                <li>
+                    <NavLink to="client">Client</NavLink>
+                </li>
+                <li>
+                    <NavLink to="subpage-b">Subpage B</NavLink>
+                </li>
+            </ul>
+            <Outlet/>
         </div>
-    )
+    );
 }
