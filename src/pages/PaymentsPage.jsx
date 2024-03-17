@@ -26,6 +26,9 @@ export default function PaymentsPage () {
     return (
         <div>
             <h1>Payments</h1>
+            <div>Filter by owner
+                <input></input>
+            </div>
             {isLoading && <p>Wait</p>}
             {error && <p>Error!</p>}
             <PaymentList payments={payments}/>

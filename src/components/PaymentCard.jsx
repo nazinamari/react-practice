@@ -5,6 +5,7 @@ export default function PaymentCard({ payment }) {
     return (
         <div>
         <p>Amount: {payment.amount}</p>
+        <p>Owner: {payment.cardOwner}</p>
         <p>Description: {payment.description}</p>
         <Link to={`/payments/${payment.id}`}>Details</Link>
         </div>
