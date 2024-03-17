@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import { getPayments } from "../payments-api"
 import PaymentList from "../components/PaymentList";
 import { useSearchParams } from "react-router-dom";
+import OwnerFilter from "../components/OwnerFilter/OwnerFilter";
 
 export default function PaymentsPage () {
 
@@ -9,13 +10,8 @@ export default function PaymentsPage () {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(false)
 
-    const [params, setParams] = useSearchParams();
+    const [params] = useSearchParams();
     const ownerFilter = params.get("owner") ?? "";
-
-    const changeOwnerFilter = (newFilter) => {
-        params.set("owner", newFilter);
-        setParams(params);
-    }
 
     useEffect(() => {
         async function getData() {
@@ -32,21 +28,19 @@ export default function PaymentsPage () {
         getData();
     }, []);
 
+    const filteredPayments = useMemo(() => {
+        return payments.filter((payment) =>
+          payment.cardOwner.toLowerCase().includes(ownerFilter.toLowerCase())
+        );
+      }, [ownerFilter, payments]);
+
     return (
         <div>
             <h1>Payments</h1>
-            <div>Filter by owner
-                <input
-                    type="text"
-                    value={ownerFilter}
-                    onChange={(e) => changeOwnerFilter(e.target.value)}
-                >
-
-                </input>
-            </div>
+            <OwnerFilter />
             {isLoading && <p>Wait</p>}
             {error && <p>Error!</p>}
-            <PaymentList payments={payments}/>
+            <PaymentList payments={filteredPayments}/>
         </div>
     )
 }
